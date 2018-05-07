@@ -15,7 +15,8 @@ var  lightGrey = '#6b6e70';
 var {height, width} = Dimensions.get('window');
 var padding = 20;
 var buttonHeight = (width - 2 * padding) / 5;
-const knight = require('./assets/Knight.png');
+const b_knight = require('./assets/b_knight.png');
+const w_knight = require('./assets/w_knight.jpg');
 /* const App = StackNavigator({
    Home: { screen: Calculator },
 }); */
@@ -38,7 +39,7 @@ export default class Calculator extends Component {
             <View style={styles.clockBar}/>
             <View style={styles.title}>
                <Text style={styles.textStyle}>Dark Calculator </Text>
-               <Image source={knight} style={{width: 40, height: 40}}/>
+               <Image source={b_knight} style={{width: 40, height: 40}}/>
             </View>
             <ValueScreen value={this.state.value}/>
             <Grid style={{marginTop: 10, marginLeft: padding, marginRight: padding}}>
