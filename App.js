@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, Dimensions, Image, TouchableHighlight, Alert } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import { Col, Row, Grid } from "react-native-easy-grid";
-import AwesomeAlert from 'react-native-awesome-alerts';
+import React, { Component } from "react";
+import { StyleSheet, View, Text, Dimensions, Image, TouchableHighlight, Alert } from "react-native";
+import { StackNavigator } from "react-navigation";
+import AwesomeAlert from "react-native-awesome-alerts";
 
 // Import custom components
-import ValueScreen from './components/ValueScreen';
+import ValueScreen from "./components/ValueScreen";
+import NumPad from "./components/NumPad";
+import { first } from "rxjs/operator/first";
 
-var darkGreen = '#61892f';
-var lightGreen = '#86c232'; 
-var darkGrey = '#222629';
-var medGrey = '#474b4f'
-var  lightGrey = '#6b6e70';
-var {height, width} = Dimensions.get('window');
-var padding = 20;
-var buttonHeight = (width - 2 * padding) / 5;
-const b_knight = require('./assets/b_knight.png');
-const w_knight = require('./assets/w_knight.jpg');
+var darkGreen = "#61892f";
+var lightGreen = "#86c232";
+var darkGrey = "#222629";
+var medGrey = "#474b4f";
+var lightGrey = "#6b6e70";
+var { height, width } = Dimensions.get("window");
+const b_knight = require("./assets/b_knight.png");
+const w_knight = require("./assets/w_knight.jpg");
+var firstNum = "";
 /* const App = StackNavigator({
    Home: { screen: Calculator },
 }); */
@@ -24,180 +24,119 @@ const w_knight = require('./assets/w_knight.jpg');
 export default class Calculator extends Component {
    constructor(props) {
       super(props);
-      this.state = {value: 0, showAlert: false};
+      this.screenRef = React.createRef();
+      this.state = {
+         value: "0",
+         func: "",
+         mode: 1
+      };
    }
 
-   processButton = () => {
-      Alert.alert( "hello" );
-   }
+   updateValue = arg => {
+      if (arg === "c") {
+         this.setState({ value: "0", func: "", mode: 1 });
+         firstNum = "";
+      } else if (arg === "+") {
+         this.setState({ func: "add" });
+         firstNum = parseInt(this.state.value);
+      } else if (arg === "-") {
+         this.setState({ func: "sub" });
+         firstNum = parseInt(this.state.value);
+      } else if (arg === "x") {
+         this.setState({ func: "mul" });
+         firstNum = parseInt(this.state.value);
+      } else if (arg === "/") {
+         this.setState({ func: "div" });
+         firstNum = parseInt(this.state.value);
+      } else if (arg === "=") {
+         this.setState({ mode: 1 });
+         switch (this.state.func) {
+            case "add":
+               this.setState({
+                  value: parseInt(firstNum) + parseInt(this.state.value)
+               });
+               break;
+            case "sub":
+               this.setState({
+                  value: parseInt(firstNum) - parseInt(this.state.value)
+               });
+               break;
+            case "mul":
+               this.setState({
+                  value: parseInt(firstNum) * parseInt(this.state.value)
+               });
+               break;
+            case "div":
+               this.setState({
+                  value: parseInt(firstNum) / parseInt(this.state.value)
+               });
+               break;
+            default:
+               break;
+         }
+      } else if (arg === ".") {
+         if (this.state.value.toString().indexOf(".") == -1) {
+            this.setState({ value: this.state.value + arg });
+         }
+      } else {
+         if (this.state.value === "0" && this.state.func === "") {
+            //No num and no function picked yet
+            this.setState({ value: arg });
+         } else if (this.state.value === "0" && !(this.state.func === "")) {
+            //Function picked but no num
+            this.setState({ value: arg });
+         } else if (!(this.state.value === "0") && this.state.func === "") {
+            //No function picked yet, num in progress
+            this.setState({ value: this.state.value.toString() + arg });
+         } else if (!(this.state.value === "0") && !(this.state.func === "")) {
+            if (this.state.mode == 1) {
+               //Function picked and firstNum finished, switch to secondSum
+               this.setState({ value: arg, mode: 2 });
+            } else {
+               //Function picked, second sum in progress
+               this.setState({ value: this.state.value.toString() + arg });
+            }
+         }
+      }
+   };
 
    render() {
-      /* const {navigate} = this.props.navigation; */
+      const value = this.state.value;
 
       return (
          <View style={styles.container}>
-            <View style={styles.clockBar}/>
+            <View style={styles.clockBar} />
             <View style={styles.title}>
                <Text style={styles.textStyle}>Dark Calculator </Text>
-               <Image source={b_knight} style={{width: 40, height: 40}}/>
+               <Image source={b_knight} style={{ width: 40, height: 40 }} />
             </View>
-            <ValueScreen value={this.state.value}/>
-            <Grid style={{marginTop: 10, marginLeft: padding, marginRight: padding}}>
-               <Col style={styles.numberCol}>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>7</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>4</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>1</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>&plusmn;</Text>
-                     </TouchableHighlight>
-                  </Row>
-               </Col>
-               <Col style={styles.numberCol}>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>8</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>5</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>2</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>0</Text>
-                     </TouchableHighlight>
-                  </Row>
-               </Col>
-               <Col style={styles.numberCol}>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>9</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>6</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>3</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>.</Text>
-                     </TouchableHighlight>
-                  </Row>
-               </Col>
-               <Col style={styles.numberCol}>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>&divide;</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>X</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>&minus;</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>+</Text>
-                     </TouchableHighlight>
-                  </Row>
-               </Col>
-               <Col style={styles.numberCol}>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>C</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>n/a</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}>=</Text>
-                     </TouchableHighlight>
-                  </Row>
-                  <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
-                        <Text style={styles.numberText}></Text>
-                     </TouchableHighlight>
-                  </Row>
-               </Col>
-            </Grid>
+            <ValueScreen value={this.state.value} />
+            <NumPad onPress={this.updateValue} />
          </View>
-      );         
+      );
    }
 }
 
 const styles = StyleSheet.create({
    container: {
-      backgroundColor: '#222629',
+      backgroundColor: "#222629",
       flex: 1,
-      flexDirection: 'column',
-      alignItems: 'center',
+      flexDirection: "column",
+      alignItems: "center"
    },
    clockBar: {
-      backgroundColor: '#86c232',
+      backgroundColor: "#86c232",
       width: width,
-      height: 20,
+      height: 20
    },
    textStyle: {
-      color: 'white',
+      color: "white",
       fontSize: 30,
-      textAlign: 'center',
+      textAlign: "center"
    },
    title: {
-      flexDirection: 'row',
+      flexDirection: "row",
       paddingTop: 5,
-      paddingBottom: 10,
-   },
-   numberButton: {
-      width: buttonHeight - 5,
-      height: buttonHeight,
-      justifyContent: 'center',
-      alignItems: 'center',
-   },
-   numberText: {
-      fontSize: 30,
-      color: lightGreen,
-   },
-   numberRow: {
-      backgroundColor: medGrey,
-      width: buttonHeight - 5,
-      height: buttonHeight,
-      marginBottom: 5,
-   },
-   numberCol: {
-      height: buttonHeight * 4 + 25,
-   },
+      paddingBottom: 10
+   }
 });
