@@ -30,10 +30,20 @@ const w_knight = require("./assets/w_knight.jpg");
 export default class Calculator extends Component {
    constructor(props) {
       super(props);
-      this.displayRef = React.createRef();
+      this.screenRef = React.createRef();
       this.state = {
          value: "10"
       };
+   }
+
+   updateValue = (value) => {
+      console.log("Received press");
+      if (value === "") {
+         this.setState({ value });
+      }
+      else {
+         this.setState({ value: (this.state.value + value) });
+      }
    }
 
    render() {
@@ -46,8 +56,8 @@ export default class Calculator extends Component {
                <Text style={styles.textStyle}>Dark Calculator </Text>
                <Image source={b_knight} style={{ width: 40, height: 40 }} />
             </View>
-            <ValueScreen ref={this.displayRef} value={value} />
-            <NumPad/>
+            <ValueScreen value={this.state.value} />
+            <NumPad onPress={this.updateValue}/>
          </View>
       );
    }
