@@ -13,10 +13,11 @@ class ValueScreen extends Component {
 
     setValue(val) {
         this.setState({ value: val });
+        console.log("I am the child");
     }
 
     render() {
-        const {value} = this.state;
+        const value = this.state.value;
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>{value}</Text>
