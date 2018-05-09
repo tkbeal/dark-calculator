@@ -24,15 +24,22 @@ const w_knight = require('./assets/w_knight.jpg');
 export default class Calculator extends Component {
    constructor(props) {
       super(props);
-      this.state = {value: 0, showAlert: false};
+      this.displayRef = React.createRef();
+      this.state = {
+         value: "10",
+      };
    }
 
-   processButton = () => {
-      Alert.alert( "hello" );
+  testFunction(value){
+      this.setState({ value });
+   }
+
+   componentDidUpdate() {
+      console.log("Value is now " + this.state.value);
    }
 
    render() {
-      /* const {navigate} = this.props.navigation; */
+      const value = this.state.value;
 
       return (
          <View style={styles.container}>
@@ -41,114 +48,114 @@ export default class Calculator extends Component {
                <Text style={styles.textStyle}>Dark Calculator </Text>
                <Image source={b_knight} style={{width: 40, height: 40}}/>
             </View>
-            <ValueScreen value={this.state.value}/>
+            <ValueScreen ref={this.displayRef} value={value}/>
             <Grid style={{marginTop: 10, marginLeft: padding, marginRight: padding}}>
                <Col style={styles.numberCol}>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, 7) } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>7</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={this.testFunction.bind(this, 4) } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>4</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>1</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>&plusmn;</Text>
                      </TouchableHighlight>
                   </Row>
                </Col>
                <Col style={styles.numberCol}>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>8</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>5</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>2</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>0</Text>
                      </TouchableHighlight>
                   </Row>
                </Col>
                <Col style={styles.numberCol}>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>9</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>6</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>3</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>.</Text>
                      </TouchableHighlight>
                   </Row>
                </Col>
                <Col style={styles.numberCol}>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>&divide;</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>X</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>&minus;</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>+</Text>
                      </TouchableHighlight>
                   </Row>
                </Col>
                <Col style={styles.numberCol}>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>C</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>n/a</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}>=</Text>
                      </TouchableHighlight>
                   </Row>
                   <Row style={styles.numberRow}>
-                     <TouchableHighlight onPress={() => this.processButton} underlayColor={darkGreen} style={styles.numberButton}>
+                     <TouchableHighlight onPress={ this.testFunction.bind(this, "You pressed a button") } underlayColor={darkGreen} style={styles.numberButton}>
                         <Text style={styles.numberText}></Text>
                      </TouchableHighlight>
                   </Row>

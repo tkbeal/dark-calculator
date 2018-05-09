@@ -11,10 +11,15 @@ class ValueScreen extends Component {
         this.state = { value: this.props.value};
     }
 
+    setValue(val) {
+        this.setState({ value: val });
+    }
+
     render() {
+        const {value} = this.state;
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>{this.state.value}</Text>
+                <Text style={styles.text}>{value}</Text>
             </View>
         );
     }
