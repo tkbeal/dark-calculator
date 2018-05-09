@@ -32,7 +32,7 @@ class NumPad extends Component {
             <Col style={styles.numberCol}>
                <Row style={styles.numberRow}>
                   <TouchableHighlight
-                     onPress={this.testFunction.bind(this, "7")}
+                     onPress={this.testFunction.bind(this, 7)}
                      underlayColor={darkGreen}
                      style={styles.numberButton}
                   >
@@ -59,7 +59,7 @@ class NumPad extends Component {
                </Row>
                <Row style={styles.numberRow}>
                   <TouchableHighlight
-                     onPress={this.testFunction.bind(this, "You pressed a button")}
+                     onPress={this.testFunction.bind(this, "+-")}
                      underlayColor={darkGreen}
                      style={styles.numberButton}
                   >
@@ -146,7 +146,7 @@ class NumPad extends Component {
             <Col style={styles.numberCol}>
                <Row style={styles.numberRow}>
                   <TouchableHighlight
-                     onPress={this.testFunction.bind(this, "You pressed a button")}
+                     onPress={this.testFunction.bind(this, "/")}
                      underlayColor={darkGreen}
                      style={styles.numberButton}
                   >
@@ -155,7 +155,7 @@ class NumPad extends Component {
                </Row>
                <Row style={styles.numberRow}>
                   <TouchableHighlight
-                     onPress={this.testFunction.bind(this, "You pressed a button")}
+                     onPress={this.testFunction.bind(this, "x")}
                      underlayColor={darkGreen}
                      style={styles.numberButton}
                   >
@@ -164,27 +164,27 @@ class NumPad extends Component {
                </Row>
                <Row style={styles.numberRow}>
                   <TouchableHighlight
-                     onPress={this.testFunction.bind(this, "You pressed a button")}
-                     underlayColor={darkGreen}
-                     style={styles.numberButton}
-                  >
-                     <Text style={styles.numberText}>&minus;</Text>
-                  </TouchableHighlight>
-               </Row>
-               <Row style={styles.numberRow}>
-                  <TouchableHighlight
-                     onPress={this.testFunction.bind(this, "You pressed a button")}
+                     onPress={this.testFunction.bind(this, "+")}
                      underlayColor={darkGreen}
                      style={styles.numberButton}
                   >
                      <Text style={styles.numberText}>+</Text>
                   </TouchableHighlight>
                </Row>
+               <Row style={styles.numberRow}>
+                  <TouchableHighlight
+                     onPress={this.testFunction.bind(this, "-")}
+                     underlayColor={darkGreen}
+                     style={styles.numberButton}
+                  >
+                     <Text style={styles.numberText}>&minus;</Text>
+                  </TouchableHighlight>
+               </Row>
             </Col>
             <Col style={styles.numberCol}>
                <Row style={styles.numberRow}>
                   <TouchableHighlight
-                     onPress={this.testFunction.bind(this, "")}
+                     onPress={this.testFunction.bind(this, "c")}
                      underlayColor={darkGreen}
                      style={styles.numberButton}
                   >
@@ -193,16 +193,16 @@ class NumPad extends Component {
                </Row>
                <Row style={styles.numberRow}>
                   <TouchableHighlight
-                     onPress={this.testFunction.bind(this, "You pressed a button")}
+                     onPress={this.testFunction.bind(this, "%")}
                      underlayColor={darkGreen}
                      style={styles.numberButton}
                   >
-                     <Text style={styles.numberText}>n/a</Text>
+                     <Text style={styles.numberText}>%</Text>
                   </TouchableHighlight>
                </Row>
                <Row style={styles.numberRow}>
                   <TouchableHighlight
-                     onPress={this.testFunction.bind(this, "You pressed a button")}
+                     onPress={this.testFunction.bind(this, "=")}
                      underlayColor={darkGreen}
                      style={styles.numberButton}
                   >
@@ -211,7 +211,7 @@ class NumPad extends Component {
                </Row>
                <Row style={styles.numberRow}>
                   <TouchableHighlight
-                     onPress={this.testFunction.bind(this, "You pressed a button")}
+                     onPress={this.testFunction.bind(this, "")}
                      underlayColor={darkGreen}
                      style={styles.numberButton}
                   >

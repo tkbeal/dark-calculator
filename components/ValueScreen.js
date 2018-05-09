@@ -10,8 +10,9 @@ class ValueScreen extends Component {
       super(props);
    }
 
+   // Debug message for current value
    componentDidUpdate() {
-      console.log("Updated screen value");
+      /* console.log("Updated screen value"); */
    }
 
    render() {
